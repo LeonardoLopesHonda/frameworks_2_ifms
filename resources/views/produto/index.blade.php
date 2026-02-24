@@ -11,42 +11,39 @@
         </div>
     </div>
 
-    <div class="card border-0 shadow-sm">
-        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+    <div class="card border-0 shadow-sm mb-3">
+        <div class="card-header bg-white">
             <h2 class="h5 mb-0">Products</h2>
-            <span class="badge text-bg-secondary">Demo list</span>
         </div>
-        <div class="table-responsive">
-            <table class="table table-hover mb-0">
-                <thead class="table-light">
-                    <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Description</th>
-                        <th class="text-end">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Classic Black Tee</td>
-                        <td>$29.90</td>
-                        <td>100% cotton everyday t-shirt.</td>
-                        <td class="text-end">
-                            <a href="{{ route('produtos.show', 1) }}" class="btn btn-sm btn-outline-secondary">View</a>
-                            <a href="{{ route('produtos.edit', 1) }}" class="btn btn-sm btn-outline-dark">Edit</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Vintage White Tee</td>
-                        <td>$34.90</td>
-                        <td>Relaxed fit with soft fabric.</td>
-                        <td class="text-end">
-                            <a href="{{ route('produtos.show', 2) }}" class="btn btn-sm btn-outline-secondary">View</a>
-                            <a href="{{ route('produtos.edit', 2) }}" class="btn btn-sm btn-outline-dark">Edit</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="card-body">
+            <div class="row g-4">
+                @foreach ($produtos as $produto)
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="card border h-100">
+                            <img
+                                src="{{ $produto['imagem'] }}"
+                                class="card-img-top"
+                                alt="{{ $produto['nome'] }}"
+                            >
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="h5 card-title">{{ $produto['nome'] }}</h3>
+                                <p class="card-text text-secondary">{{ $produto['descricao'] }}</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-end">
+                                    <span class="fw-bold">${{ $produto['preco'] }}</span>
+                                    <div class="d-flex gap-2">
+                                        <a href="{{ route('produtos.edit', $produto['id']) }}" class="btn btn-sm btn-outline-dark">Edit</a>
+                                        <form action="{{ route('produtos.destroy', $produto['id']) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
 @endsection

@@ -9,13 +9,21 @@
                     <span class="badge text-bg-dark">Demo</span>
                 </div>
                 <div class="card-body">
-                    <h2 class="h5">Classic Black Tee</h2>
-                    <p class="mb-1"><strong>Price:</strong> $29.90</p>
-                    <p class="mb-4"><strong>Description:</strong> 100% cotton everyday t-shirt.</p>
+                    <div class="mb-3">
+                        <img
+                            src="{{ $produto['imagem'] }}"
+                            class="img-fluid rounded border"
+                            alt="{{ $produto['nome'] }}"
+                        >
+                    </div>
+
+                    <h2 class="h5">{{ $produto['nome'] }}</h2>
+                    <p class="mb-1"><strong>Price:</strong> ${{ $produto['preco'] }}</p>
+                    <p class="mb-4"><strong>Description:</strong> {{ $produto['descricao'] }}</p>
 
                     <div class="d-flex gap-2">
                         <a href="{{ route('produtos.index') }}" class="btn btn-outline-secondary">Back</a>
-                        <a href="{{ route('produtos.edit', 1) }}" class="btn btn-dark">Edit</a>
+                        <a href="{{ route('produtos.edit', $produto['id']) }}" class="btn btn-dark">Edit</a>
                     </div>
                 </div>
             </div>

@@ -12,6 +12,17 @@
                         @csrf
 
                         <div class="mb-3">
+                            <label for="imagem" class="form-label">Image URL</label>
+                            <input
+                                type="text"
+                                id="imagem"
+                                name="imagem"
+                                class="form-control"
+                                placeholder="https://example.com/tshirt.jpg"
+                            >
+                        </div>
+
+                        <div class="mb-3">
                             <label for="nome" class="form-label">Name</label>
                             <input type="text" id="nome" name="nome" class="form-control" placeholder="Example: Summer Tee">
                         </div>
