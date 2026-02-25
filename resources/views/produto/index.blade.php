@@ -17,22 +17,22 @@
         </div>
         <div class="card-body">
             <div class="row g-4">
-                @foreach ($produtos as $produto)
+                @forelse ($produtos as $produto)
                     <div class="col-sm-6 col-lg-4">
                         <div class="card border h-100">
                             <img
-                                src="{{ $produto['imagem'] }}"
+                                src="{{ $produto->imagem }}"
                                 class="card-img-top"
-                                alt="{{ $produto['nome'] }}"
+                                alt="{{ $produto->nome }}"
                             >
                             <div class="card-body d-flex flex-column">
-                                <h3 class="h5 card-title">{{ $produto['nome'] }}</h3>
-                                <p class="card-text text-secondary">{{ $produto['descricao'] }}</p>
+                                <h3 class="h5 card-title">{{ $produto->nome }}</h3>
+                                <p class="card-text text-secondary">{{ $produto->descricao }}</p>
                                 <div class="mt-auto d-flex justify-content-between align-items-end">
-                                    <span class="fw-bold">${{ $produto['preco'] }}</span>
+                                    <span class="fw-bold">${{ number_format((float) $produto->preco, 2) }}</span>
                                     <div class="d-flex gap-2">
-                                        <a href="{{ route('produtos.edit', $produto['id']) }}" class="btn btn-sm btn-outline-dark">Edit</a>
-                                        <form action="{{ route('produtos.destroy', $produto['id']) }}" method="POST">
+                                        <a href="{{ route('produtos.edit', $produto->id) }}" class="btn btn-sm btn-outline-dark">Edit</a>
+                                        <form action="{{ route('produtos.destroy', $produto->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
@@ -42,7 +42,13 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="col-12">
+                        <div class="alert alert-light border mb-0">
+                            No products yet. Add your first t-shirt.
+                        </div>
+                    </div>
+                @endforelse
             </div>
         </div>
     </div>
